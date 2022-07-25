@@ -5,7 +5,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 
 const Users = () => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState()
+	const [error, setError] = useState();
 	const [loadedUsers, setLoadedUsers] = useState();
 
 	useEffect(() => {
