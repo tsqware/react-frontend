@@ -29,8 +29,6 @@ const PlaceItem = props => {
 		console.log('DELETING...');
 	}
 
-
-
 	return (
 		<React.Fragment>
 			<Modal

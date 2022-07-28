@@ -18,8 +18,6 @@ const Users = () => {
 		fetchUsers();
 	}, [sendRequest]);
 
-
-
 	return (
 		<>
 			<ErrorModal error={error} onClear={clearError} />
