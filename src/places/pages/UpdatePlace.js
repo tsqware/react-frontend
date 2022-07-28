@@ -1,30 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Input from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
+
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from "../../shared/util/validators";
-import './PlaceForm.css';
+
 import { useForm } from "../../shared/hooks/form-hook";
-
-
-import Card from "../../shared/components/UIElements/Card";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { AuthContext } from "../../shared/context/auth-context";
+import Card from "../../shared/components/UIElements/Card";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import { AuthContext } from "../../shared/context/auth-context";
+import Input from "../../shared/components/FormElements/Input";
+import Button from "../../shared/components/FormElements/Button";
 
-
+import './PlaceForm.css';
 
 const UpdatePlace = () => {
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [loadedPlace, setLoadedPlace] = useState();
-
-
-
 	const placeId = useParams().placeId;
-	console.log("placeid:", placeId);
 
 	const [formState, inputHandler, setFormData] = useForm({
 		title: {
@@ -56,8 +51,6 @@ const UpdatePlace = () => {
 		};
 		fetchPlace();
 	}, [sendRequest, placeId, setFormData]);
-
-
 
 	const placeUpdateSubmitHandler = async event => {
 		event.preventDefault();
@@ -120,7 +113,6 @@ const UpdatePlace = () => {
 						initialValid={formState.inputs.description.isValid}
 					/>
 					<Button upper type="submit" disabled={!formState.isValid}>Update Place</Button>
-
 				</form>
 			}
 		</>

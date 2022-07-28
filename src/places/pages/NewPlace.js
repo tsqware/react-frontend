@@ -11,9 +11,6 @@ import { AuthContext } from "../../shared/context/auth-context";
 
 import './PlaceForm.css';
 
-
-
-
 const NewPlace = () => {
 	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -50,7 +47,6 @@ const NewPlace = () => {
 					address: formState.inputs.address.value,
 					image: formState.inputs.image.value,
 					creator: auth.userId
-
 				}),
 				{ 'Content-Type': 'application/json' }
 			);
