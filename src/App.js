@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Users from "./user/pages/Users";
 import NewPlace from "./places/pages/NewPlace";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
@@ -15,11 +15,23 @@ const App = () => {
 	const login = useCallback((uid, token) => {
 		setToken(token);
 		setUserId(uid);
+		localStorage.setItem(
+			'userData',
+			JSON.stringify({ userId: uid, token: token })
+		);
 	}, []);
+
+	useEffect(() => {
+		const storedData = JSON.parse(localStorage.getItem('userData'));
+		if (storedData && storedData.token) {
+			login(storedData.userId, storedData.token);
+		}
+	}, [login]);
 
 	const logout = useCallback(() => {
 		setToken(null);
 		setUserId(null);
+		localStorage.removeItem('userData');
 	}, []);
 
 	let routes;
