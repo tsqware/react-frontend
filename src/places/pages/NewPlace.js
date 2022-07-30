@@ -19,6 +19,7 @@ import './PlaceForm.css';
 
 const NewPlace = () => {
 	const auth = useContext(AuthContext);
+	console.log("auth:", auth);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [formState, inputHandler] = useForm({
 		title: {
@@ -57,13 +58,16 @@ const NewPlace = () => {
 			formData.append('image', formState.inputs.image.value);
 			formData.append('creator', auth.userId);
 
+			console.log("token:", auth.token);
+
 			await sendRequest(
 				'http://localhost:5001/api/places',
 				'POST',
-				formData
+				formData,
+				{ Authorization: 'Bearer ' + auth.token }
 			);
 			navigate('/');
-		} catch (err) { }
+		} catch (err) { console.log("save place err:", err); }
 	}
 
 	return (
