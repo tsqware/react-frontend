@@ -14,8 +14,8 @@ import './PlaceItem.css';
 const PlaceItem = props => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
-	console.log("auth:", auth);
-	console.log("props:", props);
+	/* console.log("auth:", auth);
+	console.log("props:", props); */
 	const [showMap, setShowMap] = useState(false);
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -34,7 +34,7 @@ const PlaceItem = props => {
 		setShowConfirmModal(false);
 		try {
 			await sendRequest(
-				`http://localhost:5001/api/places/${props.id}`,
+				`${process.env.REACT_APP_API_URL}/places/${props.id}`,
 				'DELETE',
 				null,
 				{ Authorization: 'Bearer ' + auth.token }
@@ -76,7 +76,7 @@ const PlaceItem = props => {
 				<Card className="place-item__content">
 					{isLoading && <div className="center"><LoadingSpinner asOverlay /></div>}
 					<div className="place-item__image">
-						<img src={`http://localhost:5001/${props.image}`} alt={props.title} />
+						<img src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`} alt={props.title} />
 					</div>
 					<div className="place-item__info">
 						<h2>{props.title}</h2>

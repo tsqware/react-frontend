@@ -17,6 +17,7 @@ export const useHttpClient = () => {
 		activeHttpRequests.current.push(httpAbortCtrl);
 
 		try {
+			/* console.log("url:", url); */
 			const response = await fetch(url, {
 				method,
 				body,
@@ -25,6 +26,8 @@ export const useHttpClient = () => {
 			});
 
 			const responseData = await response.json();
+
+			/* console.log("responseData:", responseData); */
 
 			activeHttpRequests.current = activeHttpRequests.current.filter(
 				reqCtrl => reqCtrl !== httpAbortCtrl

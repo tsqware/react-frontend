@@ -19,7 +19,7 @@ import './PlaceForm.css';
 
 const NewPlace = () => {
 	const auth = useContext(AuthContext);
-	console.log("auth:", auth);
+	/* console.log("auth:", auth); */
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [formState, inputHandler] = useForm({
 		title: {
@@ -56,12 +56,11 @@ const NewPlace = () => {
 			formData.append('description', formState.inputs.description.value);
 			formData.append('address', formState.inputs.address.value);
 			formData.append('image', formState.inputs.image.value);
-			formData.append('creator', auth.userId);
 
-			console.log("token:", auth.token);
+			/* console.log("token:", auth.token); */
 
 			await sendRequest(
-				'http://localhost:5001/api/places',
+				`${process.env.REACT_APP_API_URL}/places`,
 				'POST',
 				formData,
 				{ Authorization: 'Bearer ' + auth.token }
