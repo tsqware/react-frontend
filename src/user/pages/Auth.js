@@ -87,6 +87,12 @@ const Auth = () => {
 				formData.append('email', formState.inputs.email.value);
 				formData.append('password', formState.inputs.password.value);
 				formData.append('image', formState.inputs.image.value);
+				formData.append('imageRaw', document.querySelector(".image-upload__preview img").getAttribute("src"));
+
+				/* console.log("formentries!") */
+				for (const val of formData.values()) {
+					console.dir(val);
+				}
 
 				const responseData = await sendRequest(
 					`${process.env.REACT_APP_API_URL}/users/signup`,
@@ -97,6 +103,8 @@ const Auth = () => {
 			} catch (err) { }
 		}
 	};
+
+	/* console.log("formState:", formState); */
 
 	return (
 		<>
