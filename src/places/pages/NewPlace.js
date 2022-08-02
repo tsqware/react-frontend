@@ -46,9 +46,7 @@ const NewPlace = () => {
 		event.preventDefault();
 
 
-		/*for (const pair of formData.entries()) {
-			console.log(`${pair[0]}, ${pair[1]}`);
-		}*/
+
 
 		try {
 			const formData = new FormData();
@@ -56,7 +54,11 @@ const NewPlace = () => {
 			formData.append('description', formState.inputs.description.value);
 			formData.append('address', formState.inputs.address.value);
 			formData.append('image', formState.inputs.image.value);
+			formData.append('imageRaw', document.querySelector(".image-upload__preview img").getAttribute("src"));
 
+			for (const pair of formData.entries()) {
+				console.log(`${pair[0]}, ${pair[1]}`);
+			}
 			/* console.log("token:", auth.token); */
 
 			await sendRequest(

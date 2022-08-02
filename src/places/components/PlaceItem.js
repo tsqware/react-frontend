@@ -76,7 +76,7 @@ const PlaceItem = props => {
 				<Card className="place-item__content">
 					{isLoading && <div className="center"><LoadingSpinner asOverlay /></div>}
 					<div className="place-item__image">
-						<img src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`} alt={props.title} />
+						<img src={props.image.url} alt={props.title} />
 					</div>
 					<div className="place-item__info">
 						<h2>{props.title}</h2>
